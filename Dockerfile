@@ -33,6 +33,10 @@ RUN mkdir /etc/httpd/sites-available \
     && echo $'<VirtualHost *:80>\n\
     ServerName localhost\n\
     DocumentRoot /var/www/html/web/\n\
+    <Directory /var/www/komikus>\n\
+        Options Indexes FollowSymLinks\n\
+	AllowOverride All\n\
+    </Directory>\n\
 </VirtualHost>' > /etc/httpd/sites-available/www.conf
 
 RUN ln -s /etc/httpd/sites-available/www.conf /etc/httpd/sites-enabled/www.conf
