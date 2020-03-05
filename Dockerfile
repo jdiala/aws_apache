@@ -12,6 +12,7 @@ RUN yum -y update \
     patch \
     zip \
     unzip \
+    git \
     php-opcache \
     php-mysqlnd \
     php-mbstring \
@@ -20,6 +21,8 @@ RUN yum -y update \
     php-fpm \
     && rm -rf /var/cache/yum/* \
     && yum clean all
+
+RUN sed -i '{ s/memory_limit = 128M/memory_limit = -1/i}' /etc/php.ini
 
 RUN sed -i '/<IfModule mime_module>/i <FilesMatch \\.php\$>\n\ \ \ \ SetHandler "proxy:fcgi://127.0.0.1:9000"\n<\/FilesMatch>\n' /etc/httpd/conf/httpd.conf
 
